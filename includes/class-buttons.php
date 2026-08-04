@@ -4,34 +4,36 @@ namespace Bazario\SmartOrder;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Product Buttons
+ *
+ * @package BazarioSmartOrder
+ */
 class Buttons {
 
+    /**
+     * Constructor
+     */
     public function __construct() {
 
-        // Single Product
-        add_action(
-            'woocommerce_after_add_to_cart_button',
-            [ $this, 'render_buttons' ],
-            20
-        );
+    add_action(
+        Hooks::single_product_hook(),
+        array( $this, 'single_product_buttons' ),
+        20
+    );
 
-        // Shop / Archive
-        add_action(
-            'woocommerce_after_shop_loop_item',
-            [ $this, 'render_buttons' ],
-            20
-        );
+    add_action(
+        Hooks::shop_loop_hook(),
+        array( $this, 'shop_loop_buttons' ),
+        20
+    );
 
-        // WoodMart Theme
-        add_action(
-            'woodmart_after_product_add_to_cart',
-            [ $this, 'render_buttons' ],
-            20
-        );
+}
 
-    }
-
-    public function render_buttons() {
+    /**
+     * Single Product
+     */
+    public function single_product_buttons() {
 
         global $product;
 
@@ -39,52 +41,98 @@ class Buttons {
             return;
         }
 
-        $settings = get_option( 'bso_settings', [] );
+        $this->render( $product );
 
-        $whatsapp = preg_replace(
+    }
+
+    /**
+     * Shop Loop
+     */
+    public function shop_loop_buttons() {
+
+        global $product;
+
+        if ( ! $product instanceof \WC_Product ) {
+            return;
+        }
+
+        $this->render( $product );
+
+    }
+
+    /**
+     * Render Buttons
+     */
+    private function render( \WC_Product $product ) {
+
+        $settings = Settings::get();
+
+        if ( empty( $settings['enable_whatsapp'] ) ) {
+            return;
+        }
+
+        $phone = preg_replace(
             '/\D+/',
             '',
-            $settings['whatsapp_number'] ?? ''
+            $settings['whatsapp_number']
         );
 
-        $call = $settings['call_number'] ?? '';
+        if ( empty( $phone ) ) {
+            return;
+        }
 
-        $message = rawurlencode(
-            "Hello,\n\n" .
-            "Product: {$product->get_name()}\n" .
-            "Price: " . wp_strip_all_tags( wc_price( $product->get_price() ) ) . "\n" .
-            "Link: " . get_permalink( $product->get_id() )
+        $message = sprintf(
+            "Hello,\n\nI want to order this product.\n\nProduct: %s\nPrice: %s\nLink: %s",
+            $product->get_name(),
+            wp_strip_all_tags(
+                wc_price( $product->get_price() )
+            ),
+            get_permalink( $product->get_id() )
         );
 
         ?>
+
         <div class="bso-buttons">
 
-            <?php if ( $whatsapp ) : ?>
+            <a
+                class="bso-whatsapp"
+                target="_blank"
+                rel="noopener"
+                href="<?php echo esc_url(
+                    'https://wa.me/' .
+                    $phone .
+                    '?text=' .
+                    rawurlencode( $message )
+                ); ?>">
 
-                <a
-                    class="bso-whatsapp"
-                    href="https://wa.me/<?php echo esc_attr( $whatsapp ); ?>?text=<?php echo esc_attr( $message ); ?>"
-                    target="_blank">
+                <?php
+                echo esc_html(
+                    $settings['whatsapp_text']
+                );
+                ?>
 
-                    WhatsApp Order
+            </a>
 
-                </a>
-
-            <?php endif; ?>
-
-            <?php if ( $call ) : ?>
+            <?php if ( ! empty( $settings['enable_call'] ) ) : ?>
 
                 <a
                     class="bso-call"
-                    href="tel:<?php echo esc_attr( $call ); ?>">
+                    href="tel:<?php echo esc_attr(
+                        $settings['call_number']
+                    ); ?>">
 
-                    Call to Order
+                    <?php
+                    echo esc_html(
+                        $settings['call_text']
+                    );
+                    ?>
 
                 </a>
 
             <?php endif; ?>
 
         </div>
+
         <?php
 
     }
