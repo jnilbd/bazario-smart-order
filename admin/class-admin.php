@@ -4,11 +4,23 @@ namespace Bazario\SmartOrder;
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * Admin Controller
+ *
+ * @package BazarioSmartOrder
+ * @since 2.0.0
+ */
 class Admin {
 
+    /**
+     * Constructor
+     */
     public function __construct() {
 
-        add_action( 'admin_menu', [ $this, 'register_menu' ] );
+        add_action(
+            'admin_menu',
+            array( $this, 'register_menu' )
+        );
 
     }
 
@@ -18,36 +30,32 @@ class Admin {
     public function register_menu() {
 
         add_menu_page(
-            'Bazario Smart Order',
-            'Smart Order',
+
+            __( 'Bazario Smart Order', 'bazario-smart-order' ),
+
+            __( 'Smart Order', 'bazario-smart-order' ),
+
             'manage_options',
+
             'bazario-smart-order',
-            [ $this, 'settings_page' ],
+
+            array( $this, 'dashboard' ),
+
             'dashicons-cart',
+
             56
+
         );
 
     }
 
     /**
-     * Settings Page
+     * Dashboard
      */
-    public function settings_page() {
-        ?>
-        <div class="wrap">
-            <h1>Bazario Smart Order</h1>
+    public function dashboard() {
 
-            <form method="post" action="options.php">
+        require_once BSO_PLUGIN_PATH . 'admin/views/dashboard.php';
 
-                <?php
-                settings_fields( 'bso_settings_group' );
-                do_settings_sections( 'bazario-smart-order' );
-                submit_button( 'Save Settings' );
-                ?>
-
-            </form>
-        </div>
-        <?php
     }
 
 }

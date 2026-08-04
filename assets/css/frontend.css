@@ -1,3 +1,13 @@
+/* =====================================================
+   Bazario Smart Order
+   Frontend Styles
+   Version: 2.0.0
+===================================================== */
+
+/* ==========================================
+   Product Buttons
+========================================== */
+
 .bso-buttons{
     display:flex;
     gap:10px;
@@ -6,39 +16,110 @@
 
 .bso-buttons a{
     flex:1;
-    height:48px;
     display:flex;
     align-items:center;
     justify-content:center;
+    height:48px;
     border-radius:8px;
+    text-decoration:none;
     font-size:15px;
     font-weight:600;
-    text-decoration:none;
-    transition:.25s;
+    transition:.25s ease;
+    color:#fff !important;
 }
 
 .bso-whatsapp{
     background:#25D366;
-    color:#fff !important;
 }
 
 .bso-whatsapp:hover{
     background:#1fb85a;
+    color:#fff !important;
 }
 
 .bso-call{
     background:#0d6efd;
-    color:#fff !important;
 }
 
 .bso-call:hover{
     background:#0b5ed7;
+    color:#fff !important;
 }
 
-@media(max-width:768px){
+.bso-buy-now{
+    background:#ff6a00;
+}
+
+.bso-buy-now:hover{
+    background:#e55f00;
+    color:#fff !important;
+}
+
+/* ==========================================
+   Floating Buttons
+========================================== */
+
+.bso-floating{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    z-index:999999;
+}
+
+.bso-floating a{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff !important;
+    text-decoration:none;
+    font-size:24px;
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+    transition:all .25s ease;
+}
+
+.bso-floating-whatsapp{
+    background:#25D366;
+}
+
+.bso-floating-whatsapp:hover{
+    background:#1fb85a;
+    transform:scale(1.08);
+}
+
+.bso-floating-call{
+    background:#0d6efd;
+}
+
+.bso-floating-call:hover{
+    background:#0b5ed7;
+    transform:scale(1.08);
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width:768px){
 
     .bso-buttons{
         flex-direction:column;
+    }
+
+    .bso-floating{
+        right:15px;
+        bottom:15px;
+    }
+
+    .bso-floating a{
+        width:52px;
+        height:52px;
+        font-size:22px;
     }
 
 }
