@@ -16,21 +16,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-/*
-|--------------------------------------------------------------------------
-| Composer Autoload
-|--------------------------------------------------------------------------
-*/
-
 if ( file_exists( __DIR__ . '/vendor/autoload.php' ) ) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-
-/*
-|--------------------------------------------------------------------------
-| Plugin Constants
-|--------------------------------------------------------------------------
-*/
 
 define( 'BSO_VERSION', '2.0.0' );
 define( 'BSO_PLUGIN_FILE', __FILE__ );
@@ -38,21 +26,9 @@ define( 'BSO_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BSO_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'BSO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-/*
-|--------------------------------------------------------------------------
-| Required Classes
-|--------------------------------------------------------------------------
-*/
-
 require_once BSO_PLUGIN_PATH . 'includes/class-activator.php';
 require_once BSO_PLUGIN_PATH . 'includes/class-deactivator.php';
 require_once BSO_PLUGIN_PATH . 'includes/class-plugin.php';
-
-/*
-|--------------------------------------------------------------------------
-| Activation / Deactivation
-|--------------------------------------------------------------------------
-*/
 
 register_activation_hook(
     __FILE__,
@@ -63,11 +39,5 @@ register_deactivation_hook(
     __FILE__,
     array( '\Bazario\SmartOrder\Deactivator', 'deactivate' )
 );
-
-/*
-|--------------------------------------------------------------------------
-| Boot Plugin
-|--------------------------------------------------------------------------
-*/
 
 \Bazario\SmartOrder\Plugin::init();
