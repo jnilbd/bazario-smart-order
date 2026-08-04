@@ -8,17 +8,44 @@ class Buttons {
 
     public function __construct() {
 
+        // Single Product Page
         add_action(
             'woocommerce_after_add_to_cart_button',
-            [ $this, 'render_buttons' ]
+            [ $this, 'render_buttons' ],
+            20
+        );
+
+        // Shop / Archive Page
+        add_action(
+            'woocommerce_after_shop_loop_item',
+            [ $this, 'render_shop_button' ],
+            20
         );
 
     }
 
     /**
-     * Render WhatsApp & Call Buttons
+     * Single Product Buttons
      */
     public function render_buttons() {
+
+        $this->button_html();
+
+    }
+
+    /**
+     * Shop Page Button
+     */
+    public function render_shop_button() {
+
+        $this->button_html();
+
+    }
+
+    /**
+     * Shared Button HTML
+     */
+    private function button_html() {
 
         $options = get_option( 'bso_settings', [] );
 
@@ -29,20 +56,20 @@ class Buttons {
 
         if ( ! empty( $whatsapp ) ) {
 
-            echo '<a class="button alt bso-whatsapp"
-                target="_blank"
-                href="https://wa.me/' . esc_attr( preg_replace( '/\D+/', '', $whatsapp ) ) . '">
-                WhatsApp Order
-            </a>';
+            echo '<a class="bso-whatsapp"
+                    target="_blank"
+                    href="https://wa.me/' . esc_attr( preg_replace( '/\D+/', '', $whatsapp ) ) . '">
+                    WhatsApp Order
+                  </a>';
 
         }
 
         if ( ! empty( $call ) ) {
 
-            echo '<a class="button bso-call"
-                href="tel:' . esc_attr( $call ) . '">
-                Call Now
-            </a>';
+            echo '<a class="bso-call"
+                    href="tel:' . esc_attr( $call ) . '">
+                    Call to Order
+                  </a>';
 
         }
 
