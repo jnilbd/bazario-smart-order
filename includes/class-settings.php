@@ -14,7 +14,8 @@ class Settings {
 
         register_setting(
             'bso_settings_group',
-            'bso_settings'
+            'bso_settings',
+            [ $this, 'sanitize' ]
         );
 
         add_settings_section(
@@ -24,44 +25,50 @@ class Settings {
             'bazario-smart-order'
         );
 
-        add_settings_field(
-            'whatsapp_number',
-            'WhatsApp Number',
-            [ $this, 'whatsapp_number_callback' ],
-            'bazario-smart-order',
-            'bso_general'
-        );
+        $fields = [
+            'whatsapp_number' => 'WhatsApp Number',
+            'call_number' => 'Call Number',
+            'whatsapp_text' => 'WhatsApp Button Text',
+            'call_text' => 'Call Button Text',
+        ];
 
-        add_settings_field(
-            'call_number',
-            'Call Number',
-            [ $this, 'call_number_callback' ],
-            'bazario-smart-order',
-            'bso_general'
-        );
+        foreach ( $fields as $id => $label ) {
 
-    }
+            add_settings_field(
+                $id,
+                $label,
+                [ $this, 'text_field' ],
+                'bazario-smart-order',
+                'bso_general',
+                [ 'id' => $id ]
+            );
 
-    public function whatsapp_number_callback() {
-
-        $options = get_option( 'bso_settings' );
-        ?>
-        <input type="text"
-               name="bso_settings[whatsapp_number]"
-               value="<?php echo esc_attr( $options['whatsapp_number'] ?? '' ); ?>"
-               class="regular-text">
-        <?php
+        }
 
     }
 
-    public function call_number_callback() {
+    public function sanitize( $input ) {
 
-        $options = get_option( 'bso_settings' );
+        return [
+            'whatsapp_number' => sanitize_text_field( $input['whatsapp_number'] ?? '' ),
+            'call_number'     => sanitize_text_field( $input['call_number'] ?? '' ),
+            'whatsapp_text'   => sanitize_text_field( $input['whatsapp_text'] ?? 'WhatsApp Order' ),
+            'call_text'       => sanitize_text_field( $input['call_text'] ?? 'Call Now' ),
+        ];
+
+    }
+
+    public function text_field( $args ) {
+
+        $options = get_option( 'bso_settings', [] );
+        $id      = $args['id'];
+
         ?>
-        <input type="text"
-               name="bso_settings[call_number]"
-               value="<?php echo esc_attr( $options['call_number'] ?? '' ); ?>"
-               class="regular-text">
+        <input
+            type="text"
+            class="regular-text"
+            name="bso_settings[<?php echo esc_attr( $id ); ?>]"
+            value="<?php echo esc_attr( $options[ $id ] ?? '' ); ?>">
         <?php
 
     }
