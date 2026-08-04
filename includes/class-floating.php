@@ -69,7 +69,11 @@ class Floating {
                     rel="noopener noreferrer"
                     aria-label="WhatsApp">
 
+<<<<<<< HEAD
                     💬
+=======
+                  <i class="fa-brands fa-whatsapp"></i>
+>>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
                 </a>
 
@@ -82,7 +86,11 @@ class Floating {
                     href="<?php echo esc_url( 'tel:' . $call ); ?>"
                     aria-label="Call">
 
+<<<<<<< HEAD
                     📞
+=======
+                    <i class="fa-solid fa-phone"></i>
+>>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
                 </a>
 

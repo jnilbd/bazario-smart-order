@@ -94,6 +94,7 @@ class Buttons {
 
         <div class="bso-buttons">
 
+<<<<<<< HEAD
             <a
                 class="bso-whatsapp"
                 target="_blank"
@@ -126,13 +127,55 @@ class Buttons {
                         $settings['call_text']
                     );
                     ?>
+=======
+    <?php if ( ! empty( $settings['enable_whatsapp'] ) ) : ?>
 
-                </a>
+        <a
+            class="bso-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="<?php echo esc_url(
+                'https://wa.me/' .
+                $phone .
+                '?text=' .
+                rawurlencode( $message )
+            ); ?>">
 
-            <?php endif; ?>
+            <i class="fa-brands fa-whatsapp"></i>
 
+            <span>
+                <?php echo esc_html( $settings['whatsapp_text'] ); ?>
+            </span>
+
+        </a>
+
+    <?php endif; ?>
+
+
+    <?php if ( ! empty( $settings['enable_call'] ) ) : ?>
+>>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
+
+        <a
+            class="bso-call"
+            href="tel:<?php echo esc_attr( $settings['call_number'] ); ?>">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <span>
+                <?php echo esc_html( $settings['call_text'] ); ?>
+            </span>
+
+        </a>
+
+    <?php endif; ?>
+
+</div>
+
+<<<<<<< HEAD
         </div>
 
+=======
+>>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
         <?php
 
     }

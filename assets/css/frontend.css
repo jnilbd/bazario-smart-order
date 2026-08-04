@@ -39,19 +39,6 @@
 
 .bso-call{
     background:#0d6efd;
-}
-
-.bso-call:hover{
-    background:#0b5ed7;
-    color:#fff !important;
-}
-
-.bso-buy-now{
-    background:#ff6a00;
-}
-
-.bso-buy-now:hover{
-    background:#e55f00;
     color:#fff !important;
 }
 
@@ -120,6 +107,84 @@
         width:52px;
         height:52px;
         font-size:22px;
+    }
+
+}
+/* ===== Premium Button UI ===== */
+
+.bso-buttons a,
+.bso-buy-now{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    font-size:15px;
+    font-weight:600;
+
+    min-height:50px;
+
+    border-radius:8px;
+
+    transition:.30s ease;
+
+}
+
+.bso-buttons i,
+.bso-buy-now i{
+
+    font-size:18px;
+
+}
+
+.bso-buttons a:hover,
+.bso-buy-now:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+}
+
+.bso-whatsapp{
+
+    background:#25D366;
+
+}
+
+.bso-whatsapp:hover{
+
+    background:#1fb85a;
+
+}
+
+.bso-call{
+
+    background:#0d6efd;
+
+}
+
+.bso-call:hover{
+
+    background:#0b5ed7;
+}
+
+@media (max-width:768px){
+
+    .bso-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .bso-buttons a,
+    .bso-buy-now{
+
+        min-height:54px;
+
+        font-size:16px;
+
     }
 
 }
