@@ -8,10 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * Assets Loader
  *
  * @package BazarioSmartOrder
-<<<<<<< HEAD
-=======
  * @since 2.0.0
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
  */
 class Assets {
 
@@ -20,10 +17,6 @@ class Assets {
      */
     public function __construct() {
 
-<<<<<<< HEAD
-        add_action( 'wp_enqueue_scripts', [ $this, 'frontend_assets' ] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'admin_assets' ] );
-=======
         add_action(
             'wp_enqueue_scripts',
             array( $this, 'frontend' )
@@ -33,18 +26,13 @@ class Assets {
             'admin_enqueue_scripts',
             array( $this, 'admin' )
         );
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
     }
 
     /**
      * Frontend Assets
      */
-<<<<<<< HEAD
-    public function frontend_assets() {
-=======
     public function frontend() {
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
         if ( is_admin() ) {
             return;
@@ -66,68 +54,46 @@ class Assets {
             BSO_VERSION
         );
 
-<<<<<<< HEAD
-        wp_enqueue_script(
-            'bso-frontend',
-            BSO_PLUGIN_URL . 'assets/js/frontend.js',
-            [ 'jquery' ],
-=======
         // Frontend JS
         wp_enqueue_script(
             'bso-frontend',
             BSO_PLUGIN_URL . 'assets/js/frontend.js',
             array( 'jquery' ),
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
             BSO_VERSION,
             true
         );
 
-<<<<<<< HEAD
         wp_localize_script(
             'bso-frontend',
             'bso_data',
-            [
+            array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
                 'nonce'    => wp_create_nonce( 'bso_nonce' ),
-            ]
+            )
         );
 
-=======
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
     }
 
     /**
      * Admin Assets
      */
-<<<<<<< HEAD
-    public function admin_assets( $hook ) {
+    public function admin( $hook = '' ) {
 
-        if ( strpos( $hook, 'bazario-smart-order' ) === false ) {
+        if ( ! empty( $hook ) && strpos( $hook, 'bazario-smart-order' ) === false ) {
             return;
         }
-=======
-    public function admin() {
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
         wp_enqueue_style(
             'bso-admin',
             BSO_PLUGIN_URL . 'assets/css/admin.css',
-<<<<<<< HEAD
-            [],
-=======
             array(),
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
             BSO_VERSION
         );
 
         wp_enqueue_script(
             'bso-admin',
             BSO_PLUGIN_URL . 'assets/js/admin.js',
-<<<<<<< HEAD
-            [ 'jquery' ],
-=======
             array( 'jquery' ),
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
             BSO_VERSION,
             true
         );

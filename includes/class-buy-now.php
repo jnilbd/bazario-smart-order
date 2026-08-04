@@ -53,33 +53,17 @@ class Buy_Now {
 
         <p class="bso-buy-now-wrapper">
 
-<<<<<<< HEAD
             <a
                 href="<?php echo esc_url( $url ); ?>"
                 class="button alt bso-buy-now">
 
-                <?php
-                echo esc_html(
-                    $settings['buy_now_text']
-                );
-                ?>
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <span>
+                    <?php echo esc_html( $settings['buy_now_text'] ); ?>
+                </span>
 
             </a>
-=======
-         <a
-    href="<?php echo esc_url( $url ); ?>"
-    class="button alt bso-buy-now">
-
-    <i class="fa-solid fa-cart-shopping"></i>
-
-    <span>
-
-        <?php echo esc_html( $settings['buy_now_text'] ); ?>
-
-    </span>
-
-</a>
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
 
         </p>
 

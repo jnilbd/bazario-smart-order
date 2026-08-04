@@ -16,19 +16,19 @@ class Buttons {
      */
     public function __construct() {
 
-    add_action(
-        Hooks::single_product_hook(),
-        array( $this, 'single_product_buttons' ),
-        20
-    );
+        add_action(
+            Hooks::single_product_hook(),
+            array( $this, 'single_product_buttons' ),
+            20
+        );
 
-    add_action(
-        Hooks::shop_loop_hook(),
-        array( $this, 'shop_loop_buttons' ),
-        20
-    );
+        add_action(
+            Hooks::shop_loop_hook(),
+            array( $this, 'shop_loop_buttons' ),
+            20
+        );
 
-}
+    }
 
     /**
      * Single Product
@@ -94,88 +94,47 @@ class Buttons {
 
         <div class="bso-buttons">
 
-<<<<<<< HEAD
-            <a
-                class="bso-whatsapp"
-                target="_blank"
-                rel="noopener"
-                href="<?php echo esc_url(
-                    'https://wa.me/' .
-                    $phone .
-                    '?text=' .
-                    rawurlencode( $message )
-                ); ?>">
+            <?php if ( ! empty( $settings['enable_whatsapp'] ) ) : ?>
 
-                <?php
-                echo esc_html(
-                    $settings['whatsapp_text']
-                );
-                ?>
+                <a
+                    class="bso-whatsapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="<?php echo esc_url(
+                        'https://wa.me/' .
+                        $phone .
+                        '?text=' .
+                        rawurlencode( $message )
+                    ); ?>">
 
-            </a>
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    <span>
+                        <?php echo esc_html( $settings['whatsapp_text'] ); ?>
+                    </span>
+
+                </a>
+
+            <?php endif; ?>
 
             <?php if ( ! empty( $settings['enable_call'] ) ) : ?>
 
                 <a
                     class="bso-call"
-                    href="tel:<?php echo esc_attr(
-                        $settings['call_number']
-                    ); ?>">
+                    href="tel:<?php echo esc_attr( $settings['call_number'] ); ?>">
 
-                    <?php
-                    echo esc_html(
-                        $settings['call_text']
-                    );
-                    ?>
-=======
-    <?php if ( ! empty( $settings['enable_whatsapp'] ) ) : ?>
+                    <i class="fa-solid fa-phone"></i>
 
-        <a
-            class="bso-whatsapp"
-            target="_blank"
-            rel="noopener noreferrer"
-            href="<?php echo esc_url(
-                'https://wa.me/' .
-                $phone .
-                '?text=' .
-                rawurlencode( $message )
-            ); ?>">
+                    <span>
+                        <?php echo esc_html( $settings['call_text'] ); ?>
+                    </span>
 
-            <i class="fa-brands fa-whatsapp"></i>
+                </a>
 
-            <span>
-                <?php echo esc_html( $settings['whatsapp_text'] ); ?>
-            </span>
+            <?php endif; ?>
 
-        </a>
-
-    <?php endif; ?>
-
-
-    <?php if ( ! empty( $settings['enable_call'] ) ) : ?>
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
-
-        <a
-            class="bso-call"
-            href="tel:<?php echo esc_attr( $settings['call_number'] ); ?>">
-
-            <i class="fa-solid fa-phone"></i>
-
-            <span>
-                <?php echo esc_html( $settings['call_text'] ); ?>
-            </span>
-
-        </a>
-
-    <?php endif; ?>
-
-</div>
-
-<<<<<<< HEAD
         </div>
 
-=======
->>>>>>> 6eefc4e (feat(ui): improve buttons, icons and frontend assets)
         <?php
 
     }
