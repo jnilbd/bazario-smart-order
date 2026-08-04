@@ -1,0 +1,44 @@
+.bso-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.bso-buttons a{
+    flex:1;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.25s;
+}
+
+.bso-whatsapp{
+    background:#25D366;
+    color:#fff !important;
+}
+
+.bso-whatsapp:hover{
+    background:#1fb85a;
+}
+
+.bso-call{
+    background:#0d6efd;
+    color:#fff !important;
+}
+
+.bso-call:hover{
+    background:#0b5ed7;
+}
+
+@media(max-width:768px){
+
+    .bso-buttons{
+        flex-direction:column;
+    }
+
+}
